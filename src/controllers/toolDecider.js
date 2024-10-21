@@ -1,6 +1,6 @@
 import ollama from 'ollama'
 
-const prompt = `You will return just one word. First, analyze the user's query carefully and return ONLY the appropriate word from the following options: 
+const prompt = `Analyze the user's query carefully and return ONLY the appropriate word from the following options: 
 
 - "MedScientist": If the query is related to medicine topics (e.g., symptoms, conditions).
 - "WebAstronaut": If the query is related to webpage analysis or mentions URLs.
@@ -17,19 +17,17 @@ Examples:
 - "Make a little summary about this file" -> "FileHandler"
 - "Who invented the car?" -> "Unknown"
 
-Return just the one word that applies. Just ONE word.
+Return just the one word that applies. Just ONE word. Do not return any other text.
 `
 
 export async function toolDecider(query){
     const decision = await ollama.chat({
         model: 'llama3.2:1b',
         params: {
-            prompt: prompt,
             temperature: 0.0,
-            max_tokens: 1,
-            stop: ["\n"]
+            max_tokens: 1
         },
-        messages: [{role: 'user', content: query}]
+        messages: [{role: 'user', content: `${prompt}: ${query}`}]
     })
 
     return decision.message.content.trim()

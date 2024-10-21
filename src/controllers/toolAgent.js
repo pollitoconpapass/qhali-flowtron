@@ -35,7 +35,8 @@ export async function toolAgent(query, fileAppended=null){
         messages: [{role: 'assistant', content: `You are a helpful AI medical multilingual assistant that 
             will answer the user's query ${query} based on the context provided: ${context} and the chat 
             conversation history: ${chatHistory}. 
-            Answer in the same language of the user and use a professional tone in all of your answers`}]
+            Answer in the same language of the user and use a professional tone in all of your answers`},
+                    {role: 'user', content: query}]
     })
 
     chatHistory.push({role: 'user', content: finalResponse})
