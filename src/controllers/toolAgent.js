@@ -1,35 +1,36 @@
 import ollama from 'ollama'
-import { toolDecider } from './toolDecider'
-import { fileHandler } from '../tools/fileHandler'
-import { imgClassifier } from '../tools/imgClassifier'
-import { medScientist } from '../tools/medScientist'
-import { webAstronaut } from '../tools/webAstronaut'
+import { toolDecider } from './toolDecider.js'
+import { fileHandler } from '../tools/fileHandler.js'
+import { imgClassifier } from '../tools/imgClassifier.js'
+import { medScientist } from '../tools/medScientist.js'
+import { webAstronaut } from '../tools/webAstronaut.js'
 
 const chatHistory = []
 
-export function toolAgent(query, fileAppended=null){
-    const context = ''
-    const decision = toolDecider(query)
+export async function toolAgent(query, fileAppended=null){
+    let context = ''
+    const decision = await toolDecider(query)
 
     chatHistory.push({role: 'user', content: query})
 
-    if(decision === 'FileHandler'){
+    if(decision === "FileHandler"){
         context = fileHandler(query, fileAppended)
     }
-    else if(decision === 'ImgClassifier'){
+    else if(decision === "ImgClassifier"){
         context = imgClassifier(query, fileAppended)
     }
-    else if(decision === 'MedScientist'){
+    else if(decision === "MedScientist"){
         context = medScientist(query)
     }
-    else if(decision === 'WebAstronaut'){
+    else if(decision === "WebAstronaut"){
         context = webAstronaut(query)
     }
-    else{
-        context = decision
+    else if (decision === "Unknown"){
+        context = query
     }
 
-    finalResponse = ollama.chat({
+
+    const finalResponse = ollama.chat({
         model: 'llama3.2:1b',
         messages: [{role: 'assistant', content: `You are a helpful AI medical multilingual assistant that 
             will answer the user's query ${query} based on the context provided: ${context} and the chat 

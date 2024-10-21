@@ -30,12 +30,17 @@ Now, the intention of this project is to replicate its functionality with actual
 ## Source Folder Structure
 
     src
+    |_ controllers
+        |_ toolAgent.js
+        |_ toolDecider.js
     |_ examples
         |_ testOllama.js
         |_ testToolAgent.js
-    |_ functions
-        |_ toolAgent.js
-        |_ toolDecider.js
+        |_ testToolDecider.js
+    |_ prev
+        |_ pdfs
+            |_ medicina_interna.pdf
+        |_ ingest_pinecone.py
     |_ tools
         |_ fileHandler.js
         |_ imgClassifier.js

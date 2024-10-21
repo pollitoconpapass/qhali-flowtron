@@ -1,5 +1,5 @@
 import express from 'express'
-import { toolAgent } from './functions/toolAgent'
+import { toolAgent } from './controllers/toolAgent'
 
 export const app = express()
 
