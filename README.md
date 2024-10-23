@@ -15,10 +15,11 @@ Now, the intention of this project is to replicate its functionality with actual
 - `ExpressJS` for bulding the API route
 - `LangChain` for using LLMs, embeddings
 - `Ollama` for implementing the LLM chat
+- `HuggingFace Inference` for implementing the Image-to-Text model from Hugging Face
 
 ### LLM and ML related tools
 - `LLAMA-3.2` as the LLM
-- `LLaVA: Large Language and Vision Assistant` as the vision model to analyze images
+- `nlpconnect/vit-gpt2-image-captioning` as the vision model to analyze images
 - `nomic-embed-text` as the embedding model
 
 
@@ -34,6 +35,9 @@ Now, the intention of this project is to replicate its functionality with actual
         |_ toolAgent.js
         |_ toolDecider.js
     |_ examples
+        |_ testFileHandler.js
+        |_ testImgClassifier.js
+        |_ testMedScientist.js
         |_ testOllama.js
         |_ testToolAgent.js
         |_ testToolDecider.js
