@@ -39,6 +39,6 @@ export async function toolAgent(query, fileAppended=null){
                     {role: 'user', content: query}]
     })
 
-    chatHistory.push({role: 'user', content: finalResponse})
+    chatHistory.push({role: 'assistant', content: finalResponse})
     return finalResponse.message.content
 }
