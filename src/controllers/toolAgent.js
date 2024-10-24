@@ -11,26 +11,27 @@ export async function toolAgent(query, fileAppended=null){
     let context = ''
     const decision = await toolDecider(query)
 
+    console.log(`=== Decision: ${decision} ===\n`)
+
     chatHistory.push({role: 'user', content: query})
 
     if(decision === "FileHandler"){
-        context = fileHandler(query, fileAppended)
+        context = await fileHandler(query, fileAppended)
     }
     else if(decision === "ImgClassifier"){
-        context = imgClassifier(query, fileAppended)
+        context = await imgClassifier(query, fileAppended)
     }
     else if(decision === "MedScientist"){
-        context = medScientist(query)
+        context = await medScientist(query)
     }
     else if(decision === "WebAstronaut"){
-        context = webAstronaut(query)
+        context = await webAstronaut(query)
     }
     else if (decision === "Unknown"){
         context = query
     }
 
-
-    const finalResponse = ollama.chat({
+    const finalResponse = await ollama.chat({
         model: 'llama3.2:1b',
         messages: [{role: 'assistant', content: `You are a helpful AI medical multilingual assistant that 
             will answer the user's query ${query} based on the context provided: ${context} and the chat 
