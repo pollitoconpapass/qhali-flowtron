@@ -12,9 +12,9 @@ Always respond with only the one word that applies. No explanations, clarificati
 
 Examples:
 - "What are the symptoms of anemia?" -> "MedScientist"
-- "What is this article about? https://flowise.ai" -> "WebAstronaut"
-- "What can you identify from this image?" -> "ImgClassifier"
-- "Make a little summary about this file" -> "FileHandler"
+- "What is this article about? https://flowise.ai" or if a URL is present in the query -> "WebAstronaut"
+- "What can you identify from this image? or Que ves en la imagen?" -> "ImgClassifier"
+- "Make a little summary about this file. or De que trata este archivo?" -> "FileHandler"
 - "Who invented the car?" -> "Unknown"
 
 Return just the one word that applies. Just ONE word. Do not return any other text.

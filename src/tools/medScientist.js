@@ -2,9 +2,9 @@ import ollama from 'ollama'
 import dotenv from "dotenv"
 import { Pinecone } from '@pinecone-database/pinecone'
 
-dotenv.config({ path: '../../.env' })
+dotenv.config({ path: '/Users/jose/Documents/GitHub/qhali-flowtron/.env' }) // -> replace with your own .env file path here
 
-const pineconeApiKey = process.env.PINECONE_API_KEY  
+const pineconeApiKey = process.env.PINECONE_API_KEY
 const pineconeIndexName = process.env.PINECONE_INDEX_NAME
 
 async function generateEmbeddings(text) {
@@ -37,7 +37,7 @@ async function extractPineconeContext(query){
         includeMetadata: true,
     }) 
     const pineconeContext = queryResult.matches.map(match => match.metadata.extracted_text)
-    console.log(pineconeContext)
+    // console.log(pineconeContext)
     return pineconeContext
 }
 

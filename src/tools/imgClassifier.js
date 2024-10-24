@@ -3,7 +3,7 @@ import ollama from 'ollama'
 import { readFileSync } from 'fs'
 import { HfInference } from '@huggingface/inference'
 
-dotenv.config({ path: '../../.env' })
+dotenv.config({ path: '/Users/jose/Documents/GitHub/qhali-flowtron/.env' }) // -> replace with your own .env file path here
 
 const hfToken = process.env.HF_TOKEN
 const hf = new HfInference(hfToken)
