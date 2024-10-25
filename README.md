@@ -19,7 +19,7 @@ Now, the intention of this project is to replicate its functionality with actual
 
 ### LLM and ML related tools
 - `LLAMA-3.2` as the LLM
-- `nlpconnect/vit-gpt2-image-captioning` as the vision model to analyze images
+- `nlpconnect/vit-gpt2-image-captioning` as the vision model to analyze images (looking for a better one)
 - `nomic-embed-text` as the embedding model
 
 
@@ -87,6 +87,19 @@ Test it in Postman:
 2. Go to `Body > form-data` and add the values: `query` and `file`
 
 3. `query` must be a Text value and `file` must be a File value.
+
+## 🐋 Docker file
+
+>[!WARNING]
+> This only works on Linux machines
+
+- Run the following commands:
+
+        docker build -t qhali-flowtron:latest . 
+        docker run --network host -p 8080:8080 qhali-flowtron:latest
+
+`--network host` Only works on Linux. If you're using Windows or macOS, this won't work.
+
 
 
 ### Examples
