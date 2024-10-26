@@ -24,7 +24,7 @@ async function generateEmbeddings(text) {
     }
 }
 
-async function extractPineconeContext(query){
+export async function medScientist(query){
     const pineconeClient = new Pinecone({
         apiKey: pineconeApiKey,
     }) 
@@ -37,28 +37,6 @@ async function extractPineconeContext(query){
         includeMetadata: true,
     }) 
     const pineconeContext = queryResult.matches.map(match => match.metadata.extracted_text)
-    // console.log(pineconeContext)
+
     return pineconeContext
-}
-
-export async function medScientist(query){
-    try {
-        const pineconeContext = await extractPineconeContext(query)
-        const prompt = `You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. 
-                        If you don't know the answer, just say that you don't know.
-                        Question: ${query}
-                        Context: ${pineconeContext}`
-        const finalResponse = await ollama.chat({
-            model: 'llama3.2:1b',
-            params: {
-                prompt: prompt,
-                temperature: 0.9
-            },
-            messages: [{role: 'system', content: prompt}, {role: 'user', content: query}]
-        })
-
-        return finalResponse.message.content
-    } catch (error) {
-        console.log(error)
-    }
 }

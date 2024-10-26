@@ -88,7 +88,7 @@ Test it in Postman:
 
 3. `query` must be a Text value and `file` must be a File value.
 
-## 🐋 Docker file
+## 🐋 Dockerfile
 
 >[!WARNING]
 > This only works on Linux machines
@@ -102,7 +102,7 @@ Test it in Postman:
 
 
 
-### Examples
+## 🧠 Examples
 ![alt text](public/image.png)
 
 ![alt text](public/image-1.png)
