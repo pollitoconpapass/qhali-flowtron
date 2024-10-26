@@ -12,8 +12,8 @@ Always respond with only the one word that applies. No explanations, clarificati
 
 Examples:
 - "What are the symptoms of anemia?" -> "MedScientist"
-- "What is this article about? https://flowise.ai" or if a URL is present in the query -> "WebAstronaut"
-- "What can you identify from this image? or Que ves en la imagen?" -> "ImgClassifier"
+- "What is this article about? https://flowise.ai" or if an URL link is present in the query -> "WebAstronaut"
+- "What can you identify from this image? or Que ves en la imagen? or Que ves aca?" -> "ImgClassifier"
 - "Make a little summary about this file. or De que trata este archivo?" -> "FileHandler"
 - "Who invented the car?" -> "Unknown"
 

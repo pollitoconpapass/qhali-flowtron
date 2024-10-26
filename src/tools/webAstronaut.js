@@ -26,13 +26,5 @@ export async function webAstronaut(query){
     const docs = await loader.load()
     const combinedText = docs.map(doc => doc.pageContent).join('\n')
 
-    const analysis = await ollama.chat({
-        model: 'llama3.2:1b',
-        messages: [{ role: 'user', content: `Answer the following question: ${query}. Based on the following content: ${combinedText}` }],
-        params: {
-            temperature: 0.5,
-        },
-    })
-
-    return analysis.message.content
+    return combinedText
 }
