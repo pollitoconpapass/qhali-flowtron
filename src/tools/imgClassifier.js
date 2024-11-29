@@ -1,17 +1,38 @@
 import dotenv from 'dotenv'
 import { readFileSync } from 'fs'
-import { HfInference } from '@huggingface/inference'
+import  Groq  from 'groq-sdk'
 
 dotenv.config({ path: '/Users/jose/Documents/GitHub/qhali-flowtron/.env' }) // -> replace with your own .env file path here
 
-const hfToken = process.env.HF_TOKEN
-const hf = new HfInference(hfToken)
+const client = new Groq({
+    apiKey: process.env.GROQ_API_KEY,
+})
 
-export async function imgClassifier(imageUploaded){
-    const context = await hf.imageToText({
-        data: readFileSync(imageUploaded),
-        model: 'nlpconnect/vit-gpt2-image-captioning'
+function decodeBase64(imageUploaded){
+    const imageBuffer = readFileSync(imageUploaded)
+    return imageBuffer.toString('base64')
+}
+
+export async function llamaImgClassifier(imageUploaded, query){
+    const base64Image = decodeBase64(imageUploaded)
+
+    const chatCompletion = await client.chat.completions.create({
+        messages: [
+            {
+                role: 'user',
+                content: [
+                    { type: 'text', text: query },
+                    {
+                        type: 'image_url',
+                        image_url: {
+                            url: `data:image/jpeg;base64,${base64Image}`,
+                        }
+                    }
+                ]
+            }
+        ],
+        model: 'llama-3.2-11b-vision-preview'
     })
 
-    return context.generated_text
+    return chatCompletion.choices[0].message.content
 }

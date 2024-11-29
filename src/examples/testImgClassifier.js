@@ -1,7 +1,7 @@
-import { imgClassifier } from "../tools/imgClassifier.js"
+import { llamaImgClassifier } from "../tools/imgClassifier.js"
 
-const query = "What can you identify from this image?"
+const query = "What animal do you see in this image?"
 const img = './ai-generated-stray-cat-in-danger-background-animal-background-photo.jpg'
 
-const response = await imgClassifier(query, img)
-console.log(response)
+const llamaResponse = await llamaImgClassifier(img, query)
+console.log(llamaResponse)
