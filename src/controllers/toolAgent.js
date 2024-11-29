@@ -1,7 +1,7 @@
 import ollama from 'ollama'
 import { toolDecider } from './toolDecider.js'
 import { fileHandler } from '../tools/fileHandler.js'
-import { imgClassifier } from '../tools/imgClassifier.js'
+import { llamaImgClassifier} from '../tools/imgClassifier.js'
 import { medScientist } from '../tools/medScientist.js'
 import { webAstronaut } from '../tools/webAstronaut.js'
 
@@ -19,7 +19,8 @@ export async function toolAgent(query, fileAppended=null){
         context = await fileHandler(fileAppended)
     }
     else if(decision === "ImgClassifier"){
-        context = await imgClassifier(fileAppended)
+        // context = await imgClassifier(fileAppended)
+        context = await llamaImgClassifier(fileAppended, query)
     }
     else if(decision === "MedScientist"){
         context = await medScientist(query)

@@ -15,17 +15,18 @@ Now, the intention of this project is to replicate its functionality with actual
 - `ExpressJS` for bulding the API route
 - `LangChain` for using LLMs, embeddings
 - `Ollama` for implementing the LLM chat
-- `HuggingFace Inference` for implementing the Image-to-Text model from Hugging Face
+- `Groq-SDK` for implementing the Image-to-Text model from Groq
 
 ### LLM and ML related tools
 - `LLAMA-3.2` as the LLM
-- `nlpconnect/vit-gpt2-image-captioning` as the vision model to analyze images (looking for a better one)
+- `llama-3.2-11b-vision-preview` as the vision model to analyze images
 - `nomic-embed-text` as the embedding model
 
 
 ### Other Programs
 - `Postman` to test the API
 - `Ollama Desktop` to pull and use the LLMs locally
+- `Groq` the service to handle the Vision model
 - `Pinecone` as the Vectorized DataBase to store the medical related docs and file analysis embeddings
 
 ## 🗂️ Source Folder Structure
@@ -61,7 +62,7 @@ Now, the intention of this project is to replicate its functionality with actual
         PINECONE_INDEX_NAME=
         PINECONE_ENVIRONMENT=
 
-        HF_TOKEN=
+        GROQ_API_KEY=
 
 2. Change the `dotenv config path` in:
 
