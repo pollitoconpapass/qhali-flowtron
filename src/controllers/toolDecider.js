@@ -1,23 +1,25 @@
 import ollama from 'ollama'
 
-const prompt = `Analyze the user's query carefully and return ONLY the appropriate word from the following options: 
+const prompt = `Analyze the user's query carefully and classify it by returning ONLY the appropriate word from the following options: 
 
-- "MedScientist": If the query is related to medicine topics (e.g., symptoms, conditions).
-- "WebAstronaut": If the query is related to webpage analysis or mentions URLs.
-- "ImgClassifier": If the query is about image analysis or references previous images.
-- "FileHandler": If the query is about analyzing PDF/TXT files or previous file analysis.
+- "MedScientist": For questions related to medicine, such as symptoms, conditions, diseases, anatomy, or medical research.
+- "WebAstronaut": For queries about webpage analysis, analyzing online articles, or containing an URL.
+- "ImgClassifier": For questions about analyzing images or visual content, including identifying objects, body parts, or other visual elements.
+- "FileHandler": For queries related to document analysis, such as summarizing, extracting data from, or interpreting content in PDF, TXT, or similar files.
 
-If the query doesn't match any category, return "Unknown". 
-Always respond with only the one word that applies. No explanations, clarifications, or additional text.
+If the query doesn't match any of these categories, return "Unknown".
+
+You are **not responsible for answering the query itself** or analyzing the content; your task is to classify it. Always respond with just one word from the options above, and nothing else.
 
 Examples:
 - "What are the symptoms of anemia?" -> "MedScientist"
-- "What is this article about? https://flowise.ai" or if an URL link is present in the query -> "WebAstronaut"
-- "What can you identify from this image? or Que ves en la imagen? or Que ves aca?" -> "ImgClassifier"
-- "Make a little summary about this file. or De que trata este archivo?" -> "FileHandler"
+- "Analyze this webpage: https://flowise.ai" -> "WebAstronaut"
+- "What part of the body do you identify from this image?" -> "ImgClassifier"
+- "Summarize the content of this PDF." -> "FileHandler"
 - "Who invented the car?" -> "Unknown"
 
-Return just the one word that applies. Just ONE word. Do not return any other text.
+Always return just the one word that applies. No explanations, clarifications, or additional text.
+
 `
 
 export async function toolDecider(query){
