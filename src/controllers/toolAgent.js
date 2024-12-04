@@ -19,8 +19,8 @@ export async function toolAgent(query, fileAppended=null){
         context = await fileHandler(fileAppended)
     }
     else if(decision === "ImgClassifier"){
-        // context = await imgClassifier(fileAppended)
         context = await llamaImgClassifier(fileAppended, query)
+        context = `The user has provided an image for analysis. The task is to identify objects or describe the image content: ${context}`
     }
     else if(decision === "MedScientist"){
         context = await medScientist(query)
@@ -34,13 +34,28 @@ export async function toolAgent(query, fileAppended=null){
 
     const finalResponse = await ollama.chat({   
         model: 'llama3.2:1b',
-        messages: [{role: 'assistant', content: `You are a helpful AI medical multilingual assistant that 
-            will answer the user's query ${query} based on the context provided: ${context} and the chat 
-            conversation history: ${chatHistory}. 
-            Answer in the same language of the user and use a professional tone in all of your answers`},
-                    {role: 'user', content: query}]
+        messages: [
+            {
+                role: 'assistant', 
+                content: `
+                    You are a helpful AI assistant with expertise in medical, image, file, and webpage analysis. 
+                    The user has asked a question: "${query}". 
+
+                    Your task is to respond to the user's query based on:
+                    - Context provided: ${context}
+                    - Chat conversation history: ${JSON.stringify(chatHistory)}
+
+                    The user's intent is non-harmful and involves analyzing the content or answering the question. 
+                    Answer in the same language as the user, using a professional and helpful tone in all responses.
+                `
+            },
+            {
+                role: 'user', 
+                content: query
+            }
+        ]
     })
 
-    chatHistory.push({role: 'assistant', content: finalResponse})
+    chatHistory.push({role: 'assistant', content: finalResponse.message.content})
     return finalResponse.message.content
 }
