@@ -36,6 +36,7 @@ Now, the intention of this project is to replicate its functionality with actual
         |_ toolAgent.js
         |_ toolDecider.js
     |_ examples
+        |_ test_groq_image.py
         |_ testFileHandler.js
         |_ testImgClassifier.js
         |_ testMedScientist.js
@@ -46,6 +47,8 @@ Now, the intention of this project is to replicate its functionality with actual
         |_ pdfs
             |_ medicina_interna.pdf
         |_ ingest_pinecone.py
+    |_ test
+        |_ testing_flowtron.py
     |_ tools
         |_ fileHandler.js
         |_ imgClassifier.js
@@ -79,15 +82,24 @@ Now, the intention of this project is to replicate its functionality with actual
 
 Run:
 
-    npm start
+```sh
+npm start
+```
 
-Test it in Postman:
+### Test it in Postman:
 
 1. Create a new POST request with URL: `http://127.0.0.1:8080/flowtron`
 
 2. Go to `Body > form-data` and add the values: `query` and `file`
 
 3. `query` must be a Text value and `file` must be a File value.
+
+### Test the Streaming Response in terminal
+Go to src/test and run the script in a separate terminal:
+
+```sh
+python testing_flowtron.py
+```
 
 ## 🐋 Dockerfile
 
@@ -104,6 +116,6 @@ Test it in Postman:
 
 
 ## 🧠 Examples
-![alt text](public/image.png)
+![alt text](public/postman1.png)
 
-![alt text](public/image-1.png)
+![alt text](public/postman2.png)
