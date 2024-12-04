@@ -34,8 +34,7 @@ app.post('/flowtron', upload.single('file'), async (req, res) =>{
             return res.status(400).send( { error: 'Query is required'})
         }
 
-        const answer = await toolAgent(query, fileAppended)
-        res.status(200).send({ answer })
+        await toolAgent(res, query, fileAppended)
     } catch (error) {
         console.error('Error in /flowtron:', error)
         res.status(500).send({ error: 'Internal Server Error' })
